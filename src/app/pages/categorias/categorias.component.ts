@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { WordsService } from 'src/app/services/words.service';
+import { SessionService } from 'src/app/services/session.service';
+// import { WordsService } from 'src/app/services/words.service';
 // import Lista from 'src/assets/data/match_words.json';
 import { Categoria } from 'src/assets/interface/match.interface';
 
@@ -14,15 +15,23 @@ export class CategoriasComponent implements OnInit {
 
   listCategorias!: Categoria[];
 
-  constructor(private service: WordsService) {
+  constructor(private service: SessionService) {
   }
+
   ngOnInit(): void {
-    this.service.getCategorias().subscribe({
-      next: (res) => {
-        this.listCategorias = res;
-      },
-      error: (res) => console.log(res)
-    })
+    this.service.dataWords$.subscribe((data) => {
+      if (data) {
+        this.listCategorias = data;
+        // console.log(this.listCategorias);
+      }
+    });
+
+    // this.service.getCategorias().subscribe({
+    //   next: (res) => {
+    //     this.listCategorias = res;
+    //   },
+    //   error: (res) => console.log(res)
+    // })
 
     // if (Lista) {
     //   this.listCategorias = Lista.categorias;

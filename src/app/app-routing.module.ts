@@ -5,10 +5,10 @@ import { MatchComponent } from './pages/match/match.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:'/categorias', pathMatch:'full'},
-  {path:'quiz', component:QuizComponent},
-  {path:'match/:id', component:MatchComponent},
-  {path:'categorias', component:CategoriasComponent}
+  { path: '', component: CategoriasComponent, pathMatch: 'full' },
+  { path: 'match/:id', component: MatchComponent },
+  { path: 'categorias', component: CategoriasComponent },
+  { path: 'quiz', component: QuizComponent },
 ];
 
 @NgModule({

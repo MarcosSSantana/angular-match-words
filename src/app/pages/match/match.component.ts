@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WordsService } from 'src/app/services/words.service';
-import Opcao from 'src/assets/data/match_words.json';
+import { SessionService } from 'src/app/services/session.service';
+// import { WordsService } from 'src/app/services/words.service';
+// import Opcao from 'src/assets/data/match_words.json';
 import { Categoria } from 'src/assets/interface/match.interface';
 
 @Component({
@@ -39,20 +40,27 @@ export class MatchComponent implements OnInit {
     R: { id: -1, texto: '', classe: '' },
   };
 
-  constructor(private route: ActivatedRoute, private service: WordsService) { }
+  constructor(private route: ActivatedRoute,  private service: SessionService) { }
 
   ngOnInit(): void {
 
     let idParam = this.route.snapshot.paramMap.get('id');
     this.id = parseInt(idParam || '');
 
-    this.service.getOptions(this.id).subscribe({
-      next: (res) => {
-        this.categoria = res;
+    this.service.dataWords$.subscribe((data) => {
+      if (data) {
+        this.categoria = data[this.id];
         this.setWords();
-      },
-      error: (res) => console.log(res)
-    })
+      }
+    });
+
+    // this.service.getOptions(this.id).subscribe({
+    //   next: (res) => {
+    //     this.categoria = res;
+    //     this.setWords();
+    //   },
+    //   error: (res) => console.log(res)
+    // })
 
     // if (Opcao) {
     //   this.categoria = Opcao.categorias.find(
