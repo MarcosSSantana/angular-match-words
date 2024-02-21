@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="text-center m-5">
+        <h1>Escolha uma categoria</h1>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+
+        <a *ngFor="let dados of listCategorias;index as i" [routerLink]="['/match', i]">
+            <app-reply-button [texto]="dados.categoria"></app-reply-button>
+        </a>
+
+    </div>
+</div>

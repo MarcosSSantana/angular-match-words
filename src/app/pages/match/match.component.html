@@ -1,0 +1,21 @@
+<div class="container" *ngIf="categoria">
+    <button class="btn btn-outline-light m-3" [routerLink]="['/categorias']">voltar</button>
+    <div class="box_top m-4">
+        <h1>{{ title }}</h1>
+        <h3>acertos : {{pontos}}</h3>
+        <h3>erros : {{erros}}</h3>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-6">
+            <app-reply-button *ngFor="let btn of columnLeft; index as i" [texto]="btn.texto" [classe]="btn.classe"
+                (click)="choiceClick(i, 'L')" [isDisabled]="!btn.check">
+            </app-reply-button>
+        </div>
+        <div class="col-6">
+            <app-reply-button *ngFor="let btn of columnRight; index as i" [texto]="btn.texto" [classe]="btn.classe"
+                (click)="choiceClick(i, 'R')" [isDisabled]="!btn.check">
+            </app-reply-button>
+        </div>
+    </div>
+</div>
